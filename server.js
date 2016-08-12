@@ -56,7 +56,6 @@ var server = http.createServer(function(request, response) {
 //启动HTTP服务器
 server.listen(3000, function() {
   console.log("Server listening on port 3000.");
-  console.log("Server listening on port 3000.");
 });
 
 //加载一个定制的Node模块，提供的逻辑来处理基于Socket.IO
