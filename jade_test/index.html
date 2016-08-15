@@ -25,7 +25,37 @@
   </script>
 </head>
 <body>
-  <p>i m a index.jade</p><div>hahahahahhaah</div>
+  <p>i m a index.jade</p>
+  <ul>
+    <li class="first"><a href="#">foo</a></li>
+    <li><a href="#">bar</a></li>
+    <li class="last"><a href="#">baz</a></li>
+  </ul>
+  <!--if IE
+  a(href='http://www.mozilla.com/en-US/firefox/') Get Firefox
+  
+  -->
+  <!--生成id为runtime的div-->
+  <div id="runtime"></div>
+  <script src="node_modules/jade/runtime.js"></script>
+  <script src="runtime.js"></script>
+  <script>
+    var runtimeNode = document.getElementById('runtime');
+    var runtimeHtml = template({
+      isRuntime:true
+    });
+    runtimeNode.innerHTML = runtimeHtml;
+  </script>
+  <h3>markdown</h3><p>Hi,this is <strong>imooc</strong> <a href="http://imocc.com">link</a></p>
+  <h3>sass</h3>
+  <!--style-->
+  <h3>coffee-script</h3>
+  <script>(function() {
+  console.log("this is coffee");
+
+}).call(this);
+
+  </script>
   <p>i m a index.jade</p>
   <h1>单行注释</h1>
   <!-- h1.title.title1#title imooc jade study abxcfddeeddfgfddfdfdfdf-->
@@ -65,6 +95,12 @@
   <ul></ul><strong></strong>
   <input value="123" name="course" type="text"><br>
   <input value="123" name="course" type="checkbox" checked>beijing
+  <label>Username:
+    <input name="user[name]">
+  </label>
+  <label>Username
+    <input name="user[name]">
+  </label>
   <!--var newData=23;-->
   <input>
   <h3>流程</h3>

@@ -1,8 +1,35 @@
 extends layout
 // block content
 block content
+  ul
+    li.first: a(href='#') foo
+    li: a(href='#') bar
+    li.last: a(href='#') baz
+  //if IE
+    a(href='http://www.mozilla.com/en-US/firefox/') Get Firefox
 
-  include title.html
+  //生成id为runtime的div
+  #runtime
+  script(src="node_modules/jade/runtime.js")
+  script(src="runtime.js")
+  script.
+    var runtimeNode = document.getElementById('runtime');
+    var runtimeHtml = template({
+      isRuntime:true
+    });
+    runtimeNode.innerHTML = runtimeHtml;
+  h3 markdown
+  :markdown
+    Hi,this is **imooc** [link](http://imocc.com)
+  h3 sass
+  //style
+
+  h3 coffee-script
+  script
+    :coffee
+      console.log "this is coffee"
+
+
 
   block layoutdesc
     p i m a index.jade
@@ -56,6 +83,14 @@ block content
   br
   input(value='123',name='course',type='checkbox',checked)
   | beijing
+
+  //------------------------
+  label
+    | Username:
+    input(name='user[name]')
+  label Username
+    input(name='user[name]')
+
   //var newData=23;
   input(value=newData)
 
