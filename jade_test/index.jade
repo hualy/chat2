@@ -1,13 +1,160 @@
-//Created by Hualy on 2016/8/13.
-//文档的根元素
-doctype html
-//doctype  strict
-//doctype frameset
-//doctype  xml
+extends layout
+// block content
+block content
 
-html
-  head
-    title  imooc jade study
-  body
-    h1 imooc jade study
+  include title.html
+
+  block layoutdesc
+    p i m a index.jade
+
+
+  h1 单行注释
+  // h1.title.title1#title imooc jade study abxcfddeeddfgfddfdfdfdf
+  h1 非缓冲注释
+  //- h1.title.title1#title imooc jade study abxcfddeeddfgfddfdfdfdf
+  h1 块注释
+  //
+    p
+      a(href='http://imooc.com',title='imooc jade study') 我是木渴望
+      | 1.<span>aa</span>
+      <strong>bb</strong>
+      | 2.aa
+      | 3.98
+      | 4.kj
+  h2 转义
+  - var data = 'text';
+  - var htmlData = '<script>alert(1);</script><span>script</span>;'
+  p #{data}
+  p=data
+  p #{htmlData}
+  p=htmlData
+  p !{htmlData}
+  p \#{htmlData}
+  p \!{htmlData}
+
+  h2.title.title1(class='title2',id='title4') dfdf
+  section
+  div#idname.classname
+  #idname1.classname
+
+
+  p.
+    dfdfdfddddd
+    jkdjfldj
+    jsfjsdskfjfdkfjd
+    jdfkjdkfjd
+  p
+    | dfdfdf
+    strong 11
+    | jkdjfldj
+    | jsfjsdskfjfdkfjd
+    | jdfkjdkfjd
+
+  ul
+  strong
+  input(value='123' name='course' type='text' )
+  br
+  input(value='123',name='course',type='checkbox',checked)
+  | beijing
+  //var newData=23;
+  input(value=newData)
+
+
+  h3 流程
+  h4 for
+  - var imooc = {course:'jade',level:'high'};
+  - for(var k in imooc)
+    p=imooc[k]
+
+  h4 each
+  h4 遍历对象
+  each key,value in imooc
+    p #{key}:#{value}
+  - each value,key in imooc
+    p #{key}:#{value}
+
+  h4 遍历数组
+  - var courrses=['node','jade','express'];
+  each item in courrses
+    p=item
+
+  h4 嵌套循环
+  - var sections = [{id:1,items:['a','b']},{id:2,items:['c','d']}];
+  dl
+    each  section in sections.length>0?sections:[{id:0,items:['none']}]
+      dt=section.id
+      each  item in section.items
+        dd=item
+  h4 while
+  - var  n=0;
+    ul
+      while n<4
+        li=n++
+
+
+  h3 if else
+  - var isImooc = true
+  - var lessons = ['jade','node']
+  if lessons
+    if lessons.length>2
+      p more than 2:#{lessons.join(',')}
+    else if lessons.length>1
+      p more than 1:#{lessons.join(',')}
+    else
+      p no lesson
+  else
+    p no lesson
+  h3 unless
+  // unless 后面是false就成立
+  unless !isImooc
+    p=lessons.length
+  h3 case
+  -var name = 'jade'
+  case name
+    when 'java'
+    when 'node'
+      p Hi node!
+    when 'jade' : p Hi jade!
+    when 'express': p Hi express
+    default
+      p Hi #{name}
+  h2 mixin
+  mixin lesson
+    p imooc jade study
+  +lesson
+  mixin study(name,courses)
+    p #{name} study
+    ul.courses
+      each  course in courrses
+        li=course
+  +study('tom',['jade','node'])
+  mixin group(student)
+    h4=student.name
+    +study(student.name,student.courses)
+  +group({name:'tom',courses:['jade','node']})
+
+  mixin team(slogon)
+    h4=slogon
+    if block
+      block
+    else
+      p no team
+  +team('slogon')
+    p Good job!
+  // 传递属性
+  mixin attr(name)
+    p(class!=attributes.class,id!=attributes.id) #{name}
+  +attr('attr')(class='classname1',id='id1')
+  mixin attrs(name)
+    p&attributes(attributes) #{name}
+  +attrs('attrs')(class='classname2',id='id2')
+  mixin magic(name,...items)
+    ul(class=name)
+      each item in items
+        li=item
+  +magic('','node','express','jade')
+
+
+
+
 
